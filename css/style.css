@@ -6,7 +6,7 @@
 }
 
 body {
-    background-color: #e3edf7; /* Màu nền ngoài thiệp: Xanh nhạt pastel */
+    background-color: #e3edf7;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,17 +14,13 @@ body {
     padding: 20px;
 }
 
-/* Định dạng thẻ thiệp chính */
 .card-container {
     background-color: #f4f9fb; 
     background-image: radial-gradient(#dbe9f4 2px, transparent 2px);
     background-size: 20px 20px;
     width: 100%;
     max-width: 750px; 
-    
-    /* SỬA DÒNG NÀY: Giảm padding trái/phải để nội dung rộng ra */
     padding: 30px 10px; 
-    
     box-shadow: 0 15px 35px rgba(0,0,0,0.1);
     color: #2c4c63; 
 }
@@ -39,11 +35,11 @@ body {
 .decor-line .line {
     flex-grow: 1;
     height: 1px;
-    background-color: #7fa4bd; /* Màu đường kẻ: Xanh pastel trung tính */
+    background-color: #7fa4bd;
     margin: 0 15px;
 }
 .star {
-    color: #7fa4bd; /* Màu ngôi sao */
+    color: #7fa4bd;
     font-size: 1.2rem;
 }
 .star.large {
@@ -63,14 +59,14 @@ body {
 }
 .graduate img {
     width: 100%;
-    aspect-ratio: 3 / 4; /* Giữ tỷ lệ ảnh chữ nhật đứng */
+    aspect-ratio: 3 / 4;
     object-fit: cover;
-    box-shadow: 0 5px 15px rgba(44, 76, 99, 0.15); /* Đổ bóng ảnh màu ám xanh nhẹ */
+    box-shadow: 0 5px 15px rgba(44, 76, 99, 0.15);
     border-radius: 2px;
     transition: transform 0.3s ease;
 }
 .graduate img:hover {
-    transform: scale(1.03); /* Hiệu ứng phóng to nhẹ khi di chuột vào ảnh */
+    transform: scale(1.03);
 }
 .name {
     font-family: 'Playfair Display', serif;
@@ -98,52 +94,53 @@ body {
     line-height: 1.6;
 }
 
-/* Thông tin ngày giờ */
+/* Cấu trúc mặc định cho Mobile (xếp chồng) */
 .details-section {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
     margin: 30px 0;
     font-family: 'Montserrat', sans-serif;
     font-size: 0.9rem;
 }
-/* Tách riêng thời gian và địa điểm để nới rộng phần địa điểm */
-.time {
-    flex: 1;
-    text-align: center;
-    line-height: 1.5;
-}
 
-.location {
-    flex: 2.5; /* Tăng tỉ lệ chiều rộng để khung chữ rộng ra, không bị rớt dòng chữ "Nẵng" */
+.time, .location {
     text-align: center;
     line-height: 1.5;
-    white-space: nowrap; /* ĐÃ SỬA: Ép chữ không được rớt dòng lung tung */
 }
 
 .date {
-    flex: 0 0 auto;
     text-align: center;
-    border-left: 2px solid #2c4c63; 
-    border-right: 2px solid #2c4c63;
-    padding: 0 15px; /* Thu gọn padding một chút để nhường chỗ cho text 2 bên */
-    margin: 0 10px;  /* Thu gọn margin */
+    border-top: 2px solid #2c4c63;
+    border-bottom: 2px solid #2c4c63;
+    padding: 15px 0;
+    margin: 15px 0;
+    width: 100%;
 }
-.date .month {
-    font-weight: 600;
-    letter-spacing: 3px;
-    margin-bottom: 5px;
-}
-.date .day {
-    font-family: 'Playfair Display', serif;
-    font-size: 3.5rem;
-    font-weight: 700;
-    line-height: 1;
-}
-.date .year {
-    font-weight: 600;
-    letter-spacing: 3px;
-    margin-top: 5px;
+
+.date .month { font-weight: 600; letter-spacing: 3px; margin-bottom: 5px; }
+.date .day { font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 700; line-height: 1; }
+.date .year { font-weight: 600; letter-spacing: 3px; margin-top: 5px; }
+
+/* Media Query cho Laptop (màn hình rộng) */
+@media (min-width: 601px) {
+    .details-section {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        gap: 10px;
+    }
+    .time { text-align: center; padding-right: 20px; }
+    .location { text-align: center; padding-left: 20px; }
+    .date {
+        border-top: none;
+        border-bottom: none;
+        border-left: 2px solid #2c4c63;
+        border-right: 2px solid #2c4c63;
+        padding: 0 15px;
+        margin: 0;
+        width: auto;
+    }
 }
 
 /* Footer RSVP */
@@ -162,60 +159,17 @@ body {
     padding: 5px 10px;
     transition: color 0.2s ease;
 }
-.rsvp:hover {
-    color: #1a3344; /* Màu khi di chuột vào sẽ đậm hơn một chút */
-    font-weight: 600;
-}
-.footer .stars {
-    color: #7fa4bd;
-    font-size: 0.8rem;
-}
+.rsvp:hover { color: #1a3344; font-weight: 600; }
+.footer .stars { color: #7fa4bd; font-size: 0.8rem; }
 
-/* Reponsive cho điện thoại */
+/* Responsive Grid cho ảnh (Mobile vẫn 3 cột) */
 @media (max-width: 600px) {
-    /* ĐÃ SỬA: Ép grid hiển thị 3 cột bằng nhau ngay cả trên điện thoại */
-    .graduates-grid {
-        grid-template-columns: repeat(3, 1fr); 
-        gap: 10px; /* Thu nhỏ khoảng cách giữa các ảnh một chút cho vừa màn hình */
-    }
-
-    /* Thu nhỏ chữ tên một chút trên mobile để không bị tràn */
-    .name {
-        font-size: 0.7rem;
-    }
-
-    .details-section {
-        flex-direction: column;
-        gap: 20px;
-    }
-    .date {
-        border: none;
-        border-top: 2px solid #2c4c63;
-        border-bottom: 2px solid #2c4c63;
-        padding: 15px 0;
-        margin: 0;
-        width: 100%;
-    }
-    
-    /* Gỡ bỏ nowrap trên điện thoại để text địa chỉ tự rớt dòng */
-    .location {
-        white-space: normal;
-    }
+    .graduates-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .name { font-size: 0.7rem; }
 }
 
-/* --- Hiệu ứng pháo hoa thêm vào --- */
 #fireworks {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 9999; 
-    pointer-events: none; /* Giúp người dùng click xuyên qua pháo hoa để bấm RSVP */
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; pointer-events: none;
 }
 
-/* Thêm đoạn này vào dưới cùng file style.css */
-.nowrap {
-    white-space: nowrap;
-    display: inline-block;
-}
+.nowrap { white-space: nowrap; display: inline-block; }
